@@ -247,8 +247,40 @@ td {
   margin: 0;
 }
 
-.preview-stock {
-  font-size: 14px;
-  color: #555;
+
+
+.preview-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
 }
 
+.preview-thumb {
+  max-width: 180px;
+  max-height: 180px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.preview-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.preview-name {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.preview-article {
+  font-size: 13px;
+  color: #666;
+}
+
+.preview-stock {
+  font-size: 13px;
+}

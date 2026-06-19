@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const { data, error } = await supabaseClient
       .from("products")
       .select("*")
-      .ilike("name", `%${query}%`)
+      .or(`name.ilike.%${query}%,article_number.eq.${query}`)
       .limit(8);
 
     if (error) {
@@ -109,7 +109,7 @@ function renderResults(container, data) {
   data.forEach((item, index) => {
     const div = document.createElement("div");
     div.classList.add("result-item");
-    div.textContent = `${item.name} (${item.stock} ${item.unit})`;
+    div.textContent = `${item.name} | Art.-Nr: ${item.article_number}  | ${item.fill} ${item.unit}`;
 
     div.addEventListener("click", () => {
       selectProduct(item);
@@ -151,10 +151,39 @@ function renderPreview(product) {
       />
 
       <div class="preview-info">
-        <div class="preview-name">${product.name}</div>
-        <div class="preview-stock">
-          ${product.stock} ${product.unit}
+
+        <div class="preview-name">
+          ${product.name}
         </div>
+
+        <div class="preview-article">
+          Art.-Nr: ${product.article_number || "-"}
+        </div>
+
+        <div>
+          Bestand: ${product.stock ?? 0}
+        </div>
+
+        <div>
+          Hersteller: ${product.company ?? "-"}
+        </div>
+
+        <div>
+          Füllmenge: ${product.fill && product.unit ? `${product.fill} ${product.unit}` : "-"}
+        </div>
+
+        <div>
+          Kategorie: ${product.category ?? "-"}
+        </div>
+
+        <div>
+          Alkohol: ${product.alcohol ?? "-"}
+        </div>
+
+        <div>
+          Erstellt am: ${product.created_at ?? "-"}
+        </div>
+
       </div>
 
     </div>
