@@ -1,0 +1,254 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #1abc9c;
+}
+
+/* Layout */
+.dashboard {
+  display: flex;
+  height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background: #16a085;
+  color: white;
+  padding: 20px;
+}
+
+.logo {
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.sidebar nav a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  padding: 10px 0;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.sidebar nav a:hover {
+  opacity: 1;
+}
+
+/* Main */
+.main {
+  flex: 1;
+  padding: 30px;
+}
+
+/* Topbar */
+.topbar h1 {
+  color: white;
+  font-size: 24px;
+}
+
+.topbar p {
+  color: rgba(255,255,255,0.8);
+  margin-top: 5px;
+}
+
+/* Cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.card {
+  background: white;
+  padding: 18px;
+  border-radius: 6px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.card h3 {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.card p {
+  font-size: 16px;
+  color: #16a085;
+  font-weight: 500;
+}
+
+/* Table */
+.table-box {
+  margin-top: 25px;
+  background: white;
+  padding: 20px;
+  border-radius: 6px;
+}
+
+.table-box h2 {
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+th {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  color: #666;
+}
+
+td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+#search-results {
+  border: 1px solid #ddd;
+  max-height: 200px;
+  overflow-y: auto;
+  background: white;
+}
+
+.result-item {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.result-item:hover,
+.result-item.active {
+  background: #f0f0f0;
+}
+
+/* ===== CLEAN FORM DESIGN ===== */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 420px;
+}
+
+/* jede Gruppe sauber getrennt */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Labels moderner */
+.form-group label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #444;
+}
+
+/* Inputs einheitlich */
+.form-group input,
+.form-group select {
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 3px rgba(74,144,226,0.15);
+}
+
+/* Button modern */
+.form button {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  background: #2d6cdf;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.form button:hover {
+  background: #1f57c3;
+}
+
+/* Autocomplete sauber darunter */
+#search-results {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  max-height: 180px;
+  overflow-y: auto;
+  background: white;
+  margin-top: 4px;
+}
+
+.result-item {
+  padding: 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.result-item:hover,
+.result-item.active {
+  background: #f2f5ff;
+}
+
+/* 2-Spalten Layout */
+.stock-layout {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+/* Links Form */
+.form {
+  flex: 1;
+}
+
+/* Rechts Preview */
+.product-preview {
+  flex: 1;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #fafafa;
+  min-height: 200px;
+}
+
+.product-preview .empty {
+  color: #888;
+}
+
+/* Produkt Card */
+.preview-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.preview-card h3 {
+  margin: 0;
+}
+
+.preview-stock {
+  font-size: 14px;
+  color: #555;
+}
+

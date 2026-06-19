@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bestand aufnehmen</title>
+  <link rel="stylesheet" href="styledashboard.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+  <aside class="sidebar">
+    <div class="logo">Getränkeverwaltung Staufener SC</div>
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="inventory.html">Bestand</a>
+      <a href="bestandaufnehmen.html">Bestand aufnehmen</a>
+      <a href="#">Statistik</a>
+      <a href="#">Logout</a>
+    </nav>
+  </aside>
+
+  <main class="main">
+
+    <header class="topbar">
+      <h1>Bestand aufnehmen</h1>
+      <p>Getränkeverbrauch buchen</p>
+    </header>
+
+<section class="table-box">
+
+  <h2>Neuer Eintrag</h2>
+
+  <div class="stock-layout">
+
+    <!-- LINKS -->
+    <form class="form">
+
+      <div class="form-group">
+        <label>Getränk suchen</label>
+        <input type="text" id="product-search" placeholder="Name oder Artikelnummer..." />
+        <div id="search-results"></div>
+      </div>
+
+      <div class="form-group">
+        <label>Aktion</label>
+        <select id="action">
+          <option value="add">Bestand hinzufügen</option>
+          <option value="set">Bestand setzen</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Menge</label>
+        <input type="number" id="quantity" placeholder="z.B. 1"/>
+      </div>
+
+      <button type="submit">Speichern</button>
+
+    </form>
+
+    <!-- RECHTS: PREVIEW -->
+    <div class="product-preview" id="product-preview">
+      <p class="empty">Kein Produkt ausgewählt</p>
+    </div>
+
+  </div>
+
+</section>
+
+  </main>
+
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabaseClient.js"></script>
+  <script src="bestand.js"></script>
+  <script src="auth.js"></script>
+
+</body>
+</html>

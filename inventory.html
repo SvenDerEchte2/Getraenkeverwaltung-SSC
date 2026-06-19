@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bestand</title>
+  <link rel="stylesheet" href="styledashboard.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+  <aside class="sidebar">
+    <div class="logo">Getränkeverwaltung Staufener SC</div>
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="inventory.html">Bestand</a>
+      <a href="bestandaufnehmen.html">Bestand aufnehmen</a>
+      <a href="#">Statistik</a>
+      <a href="#">Logout</a>
+    </nav>
+  </aside>
+
+  <main class="main">
+
+    <header class="topbar">
+      <h1>Bestand</h1>
+      <p>Bestände im Überblick</p>
+    </header>
+
+    <section class="table-box">
+      <h2>Alle Produkte</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Produkt</th>
+            <th>Einheit</th>
+            <th>Bestand</th>
+          </tr>
+        </thead>
+
+        <tbody id="table-body">
+
+        </tbody>
+
+      </table>
+    </section>
+
+  </main>
+
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabaseClient.js"></script>
+  <script src="auth.js"></script>
+  <script src="inventory.js"></script>
+
+</body>
+</html>

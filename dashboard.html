@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard</title>
+
+  <link rel="stylesheet" href="styledashboard.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">Getränkeverwaltung Staufener SC</div>
+
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="inventory.html">Bestand</a>
+      <a href="bestandaufnehmen.html">Bestand aufnehmen</a>
+      <a href="#">Statistik</a>
+      <a href="#">Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Main -->
+  <main class="main">
+
+    <header class="topbar">
+      <h1>Dashboard</h1>
+      <p>Getränkeverwaltung</p>
+    </header>
+
+    <!-- Table -->
+    <section class="table-box">
+      <h2>Letzte Einträge</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Spieler</th>
+            <th>Getränk</th>
+            <th>Menge</th>
+            <th>Datum</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>Max Müller</td>
+            <td>Bier</td>
+            <td>2</td>
+            <td>18.06.2026</td>
+          </tr>
+
+          <tr>
+            <td>Tom Schmidt</td>
+            <td>Wasser</td>
+            <td>1</td>
+            <td>18.06.2026</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabaseClient.js"></script>
+  <script src="auth.js"></script>
+
+</body>
+</html>
