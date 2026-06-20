@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Einkaufsliste</title>
+
+  <link rel="stylesheet" href="styledashboard.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">Getränkeverwaltung Staufener SC</div>
+
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="inventory.html">Bestand</a>
+      <a href="bestandaufnehmen.html">Bestand aufnehmen</a>
+      <a href="overview.html">Produktübersicht</a>
+      <a href="einkaufsliste.html">Einkaufsliste</a>
+      <a href="#">Statistik</a>
+      <a href="#">Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Main -->
+  <main class="main">
+
+    <header class="topbar">
+      <h1>Einkaufsliste</h1>
+      <p>Listen verwalten & Produkte hinzufügen</p>
+    </header>
+
+    <!-- LISTEN -->
+    <section class="table-box">
+
+      <div class="actions">
+        <button id="create-list-btn">+ Neue Liste</button>
+      </div>
+
+      <h2>Deine Listen</h2>
+      <div id="lists"></div>
+
+    </section>
+
+    <!-- AKTIVE LISTE -->
+    <section class="table-box">
+
+      <h2 id="active-list-title">Keine Liste ausgewählt</h2>
+
+      <!-- PRODUKT HINZUFÜGEN -->
+      <div class="add-product-box">
+
+        <input id="product-search" placeholder="Produkt suchen..." />
+        <input id="quantity" type="number" placeholder="Menge" />
+
+        <button id="add-product-btn">Hinzufügen</button>
+
+        <div id="search-results"></div>
+      </div>
+
+      <!-- ITEMS -->
+      <table>
+        <thead>
+          <tr>
+            <th>Produkt</th>
+            <th>Menge</th>
+          </tr>
+        </thead>
+
+        <tbody id="list-items">
+          <tr>
+            <td colspan="2">Keine Liste ausgewählt</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </section>
+
+  </main>
+</div>
+
+<!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabaseClient.js"></script>
+
+<!-- LOGIC -->
+<script src="einkaufsliste.js"></script>
+<script src="auth.js"></script>
+
+</body>
+</html>

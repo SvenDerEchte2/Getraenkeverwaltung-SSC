@@ -61,45 +61,80 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // 💾 Submit
+  
   form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (!selectedProduct) {
-      alert("Bitte Produkt auswählen");
-      return;
-    }
+  if (!selectedProduct) {
+    alert("Bitte Produkt auswählen");
+    return;
+  }
 
-    const qty = parseInt(document.getElementById("quantity").value);
-    const action = document.getElementById("action").value;
+  const {
+    data: { user }
+  } = await supabaseClient.auth.getUser();
 
-    let newStock = selectedProduct.stock;
+  const qty = parseInt(document.getElementById("quantity").value);
+  const unit = document.getElementById("unit").value;
+  const action = document.getElementById("action").value;
 
-    if (action === "add") {
-      newStock += qty;
-    } else {
-      newStock = qty;
-    }
+  if (!qty || qty <= 0) {
+    alert("Bitte gültige Menge eingeben");
+    return;
+  }
 
-    const { error } = await supabaseClient
-      .from("products")
-      .update({ stock: newStock })
-      .eq("id", selectedProduct.id);
+  const bottlesPerCrate = selectedProduct.bottlesincrate || 1;
 
-    if (error) {
-      console.error(error);
-      alert("Fehler beim Speichern");
-      return;
-    }
+  let changeInBottles =
+    unit === "crate"
+      ? qty * bottlesPerCrate
+      : qty;
 
-    alert("Gespeichert!");
+  const oldStock = selectedProduct.stock || 0;
 
-    // reset
-    selectedProduct = null;
-    input.value = "";
-    document.getElementById("quantity").value = "";
-    document.getElementById("search-results").innerHTML = "";
-    clearPreview();
-  });
+  let newStock =
+    action === "add"
+      ? oldStock + changeInBottles
+      : changeInBottles;
+
+  // 1. UPDATE PRODUCTS
+  const { error } = await supabaseClient
+    .from("products")
+    .update({ stock: newStock })
+    .eq("id", selectedProduct.id);
+
+  if (error) {
+    console.error(error);
+    alert("Fehler beim Speichern");
+    return;
+  }
+
+  // 2. LOG NUR WENN UPDATE OK
+  const { error: logError } = await supabaseClient
+  .from("stock_logs")
+  .insert({
+  product_id: selectedProduct.id,   // muss NUMBER sein
+  user_id: user?.id || null,        // UUID ok
+  change_amount: changeInBottles,
+  old_stock: oldStock,
+  new_stock: newStock,
+  unit: unit,
+  action: action
+})
+
+  if (logError) {
+    console.error("Log Fehler:", logError);
+  }
+
+  alert("Gespeichert!");
+
+  // reset
+  selectedProduct = null;
+  input.value = "";
+  document.getElementById("quantity").value = "";
+  document.getElementById("search-results").innerHTML = "";
+  clearPreview();
+});
 });
 
 // 🧱 Render Liste
@@ -161,8 +196,17 @@ function renderPreview(product) {
         </div>
 
         <div>
-          Bestand: ${product.stock ?? 0}
-        </div>
+  <strong>Bestand:</strong>
+  ${(() => {
+    const stock = product.stock || 0;
+    const perCrate = product.bottlesincrate || 1;
+
+    const crates = Math.floor(stock / perCrate);
+    const bottles = stock % perCrate;
+
+    return `${stock} (${crates} Kisten + ${bottles} Flaschen)`;
+  })()}
+</div>
 
         <div>
           Hersteller: ${product.company ?? "-"}
@@ -178,6 +222,11 @@ function renderPreview(product) {
 
         <div>
           Alkohol: ${product.alcohol ?? "-"}
+        </div>
+
+        <div>
+          <strong>Verkaufspreis:</strong>
+          ${product.sale_price ?? "-"} €
         </div>
 
         <div>

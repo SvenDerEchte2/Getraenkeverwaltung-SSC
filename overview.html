@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produktübersicht</title>
+
+  <link rel="stylesheet" href="styledashboard.css">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
+</head>
+
+<body>
+
+<div class="dashboard">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="logo">
+      Getränkeverwaltung Staufener SC
+    </div>
+
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="inventory.html">Bestand</a>
+      <a href="bestandaufnehmen.html">Bestand aufnehmen</a>
+      <a href="overview.html" class="active">Produktübersicht</a>
+      <a href="einkaufsliste.html">Einkaufsliste</a>
+      <a href="#">Statistik</a>
+      <a href="#">Logout</a>
+    </nav>
+
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="main">
+
+    <header class="topbar">
+      <h1>Produktübersicht</h1>
+      <p>Produkte suchen und anzeigen</p>
+    </header>
+
+    <section class="table-box">
+
+      <h2>Produktsuche</h2>
+
+      <div class="stock-layout">
+
+        <!-- LINKE SEITE -->
+        <div class="search-panel">
+
+          <div class="form-group">
+            <label for="product-search">
+              Produkt suchen
+            </label>
+
+            <input
+              type="text"
+              id="product-search"
+              placeholder="Name oder Artikelnummer..."
+              autocomplete="off"
+            >
+
+            <div id="search-results"></div>
+          </div>
+
+        </div>
+
+        <!-- RECHTE SEITE -->
+        <div
+          class="product-preview"
+          id="product-preview"
+        >
+
+          <p class="empty">
+            Kein Produkt ausgewählt
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="supabaseClient.js"></script>
+<script src="overview.js"></script>
+<script src="auth.js"></script>
+
+</body>
+</html>
