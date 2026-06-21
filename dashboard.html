@@ -24,7 +24,7 @@
       <a href="overview.html">Produktübersicht</a>
       <a href="einkaufsliste.html">Einkaufsliste</a>
       <a href="#">Statistik</a>
-      <a href="#">Logout</a>
+      <a href="#" onclick="logout()">Logout</a>
     </nav>
   </aside>
 
@@ -42,19 +42,21 @@
 
       <table>
         <thead>
-          <tr>
-            <th>Benutzer</th>
-            <th>Getränk</th>
-            <th>Menge</th>
-            <th>Datum</th>
-          </tr>
-        </thead>
+  <tr>
+    <th>Benutzer</th>
+    <th>Aktion</th>
+    <th>Tabelle</th>
+    <th>Record ID</th>
+    <th>Datum</th>
+    <th>Details</th>
+  </tr>
+</thead>
 
         <tbody id="log-table-body"></tbody>
       </table>
     </section>
 <footer class="footer">
-  <p>© 2026 Getränkeverwaltung Staufener SC | Sven Rademacher | 20.06.2026 Version 1</p>
+  <p>© 2026 Getränkeverwaltung Staufener SC | Sven Rademacher | 21.06.2026 Version 1</p>
 </footer>
   </main>
 
@@ -62,8 +64,8 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabaseClient.js"></script>
-  <script src="dashboard.js"></script>
   <script src="auth.js"></script>
+  <script src="dashboard.js"></script>
 
 </body>
 </html>

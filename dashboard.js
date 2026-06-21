@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const tbody = document.getElementById("log-table-body");
 
-  // 1. LOGS holen
+  // 1. Activity Logs holen
   const { data: logs, error: logError } = await supabaseClient
-    .from("stock_logs")
+    .from("activity_log")
     .select("*")
     .order("created_at", { ascending: false })
     .limit(20);
@@ -14,31 +14,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   if (!logs || logs.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="4">Keine Einträge</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="5">Keine Einträge</td></tr>`;
     return;
   }
 
-  // 2. Produkt-IDs sammeln
-  const productIds = [...new Set(logs.map(l => l.product_id))];
-
-  // 3. Produkte holen
-  const { data: products, error: productError } = await supabaseClient
-    .from("products")
-    .select("id, name")
-    .in("id", productIds);
-
-  if (productError) {
-    console.error("Product Fehler:", productError);
-    return;
-  }
-
-  // 4. Map bauen (id → name)
-  const productMap = {};
-  (products || []).forEach(p => {
-    productMap[p.id] = p.name;
-  });
-
-  // 5. Tabelle rendern
+  // 2. Tabelle rendern
   tbody.innerHTML = "";
 
   logs.forEach(log => {
@@ -48,11 +28,17 @@ document.addEventListener("DOMContentLoaded", async () => {
       ? new Date(log.created_at).toLocaleDateString("de-DE")
       : "-";
 
+    const detailsText = log.details
+      ? JSON.stringify(log.details)
+      : "-";
+
     tr.innerHTML = `
       <td>${log.user_id ?? "-"}</td>
-      <td>${productMap[log.product_id] ?? "-"}</td>
-      <td>${log.change_amount ?? 0}</td>
+      <td>${log.action ?? "-"}</td>
+      <td>${log.table_name ?? "-"}</td>
+      <td>${log.record_id ?? "-"}</td>
       <td>${date}</td>
+      <td>${detailsText}</td>
     `;
 
     tbody.appendChild(tr);

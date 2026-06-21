@@ -2,10 +2,12 @@
 document.body.style.display = "none";
 
 (async () => {
-  const { data, error } = await supabaseClient.auth.getUser();
+  const {
+    data: { session }
+  } = await supabaseClient.auth.getSession();
 
-  if (error || !data.user) {
-    window.location.replace("login.html");
+  if (!session) {
+    window.location.replace("index.html");
     return;
   }
 

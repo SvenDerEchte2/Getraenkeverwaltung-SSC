@@ -70,10 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  const {
-    data: { user }
-  } = await supabaseClient.auth.getUser();
-
   const qty = parseInt(document.getElementById("quantity").value);
   const unit = document.getElementById("unit").value;
   const action = document.getElementById("action").value;
@@ -85,19 +81,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const bottlesPerCrate = selectedProduct.bottlesincrate || 1;
 
-  let changeInBottles =
-    unit === "crate"
-      ? qty * bottlesPerCrate
-      : qty;
+  const changeInBottles =
+    unit === "crate" ? qty * bottlesPerCrate : qty;
 
   const oldStock = selectedProduct.stock || 0;
 
-  let newStock =
+  const newStock =
     action === "add"
       ? oldStock + changeInBottles
-      : changeInBottles;
+      : Math.max(0, oldStock - changeInBottles);
 
-  // 1. UPDATE PRODUCTS
+  // 1. UPDATE PRODUCT
   const { error } = await supabaseClient
     .from("products")
     .update({ stock: newStock })
@@ -109,28 +103,20 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  // 2. LOG NUR WENN UPDATE OK
-  const { error: logError } = await supabaseClient
-  .from("stock_logs")
-  .insert({
-  product_id: selectedProduct.id,   // muss NUMBER sein
-  user_id: user?.id || null,        // UUID ok
-  change_amount: changeInBottles,
+  // 2. LOG NUR IN activity_log
+  await addLog("PRODUCT_STOCK_UPDATE", "products", selectedProduct.id, {
   old_stock: oldStock,
   new_stock: newStock,
-  unit: unit,
-  action: action
-})
-
-  if (logError) {
-    console.error("Log Fehler:", logError);
-  }
+  change_amount: changeInBottles,
+  unit,
+  action,
+  timestamp: new Date().toISOString()
+});
 
   alert("Gespeichert!");
 
   // reset
   selectedProduct = null;
-  input.value = "";
   document.getElementById("quantity").value = "";
   document.getElementById("search-results").innerHTML = "";
   clearPreview();

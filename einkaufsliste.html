@@ -24,7 +24,7 @@
       <a href="overview.html">Produktübersicht</a>
       <a href="einkaufsliste.html">Einkaufsliste</a>
       <a href="#">Statistik</a>
-      <a href="#">Logout</a>
+      <a href="#" onclick="logout()">Logout</a>
     </nav>
   </aside>
 
@@ -58,6 +58,13 @@
 
         <input id="product-search" placeholder="Produkt suchen..." />
         <input id="quantity" type="number" placeholder="Menge" />
+        <select id="quantity-unit">
+        <option value="Flaschen">Flaschen</option>
+        <option value="Kisten">Kisten</option>
+        <option value="Stück" selected>Stück</option>
+        <option value="g">Gramm</option>
+        <option value="kg">Kilogramm</option>
+        </select>
 
         <button id="add-product-btn">Hinzufügen</button>
 
@@ -67,15 +74,21 @@
       <!-- ITEMS -->
       <table>
         <thead>
-          <tr>
-            <th>Produkt</th>
-            <th>Menge</th>
-          </tr>
-        </thead>
+  <tr>
+    <th>Erledigt</th>
+    <th>Firma</th>
+    <th>Produkt</th>
+    <th>Füllmenge</th>
+    <th>Kategorie</th>
+    <th>Art.-Nr.</th>
+    <th>Menge</th>
+    <th>Aktionen</th>
+  </tr>
+</thead>
 
         <tbody id="list-items">
           <tr>
-            <td colspan="2">Keine Liste ausgewählt</td>
+            <td colspan="4">Keine Liste ausgewählt</td>
           </tr>
         </tbody>
       </table>
@@ -88,10 +101,8 @@
 <!-- SUPABASE -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabaseClient.js"></script>
-
-<!-- LOGIC -->
-<script src="einkaufsliste.js"></script>
 <script src="auth.js"></script>
+<script src="einkaufsliste.js"></script>
 
 </body>
 </html>
