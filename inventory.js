@@ -38,7 +38,17 @@ function renderTable(data) {
     row.innerHTML = `
       <td>${item.name}</td>
       <td>${item.unit}</td>
-      <td>${item.stock}</td>
+      <td>
+  ${(() => {
+    const stock = item.stock || 0;
+    const perCrate = item.bottlesincrate || 1;
+
+    const crates = Math.floor(stock / perCrate);
+    const bottles = stock % perCrate;
+
+    return `${stock} (${crates} Kisten)`;
+  })()}
+</td>
     `;
 
     tbody.appendChild(row);

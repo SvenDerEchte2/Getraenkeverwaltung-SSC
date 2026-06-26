@@ -230,3 +230,23 @@ function clearPreview() {
 
   box.innerHTML = `<p class="empty">Kein Produkt ausgewählt</p>`;
 }
+
+async function addLog(action, tableName, recordId, details) {
+  const {
+    data: { user }
+  } = await supabaseClient.auth.getUser();
+
+  const { error } = await supabaseClient
+    .from("activity_log")
+    .insert({
+      user_id: user?.id ?? null,
+      action,
+      table_name: tableName,
+      record_id: String(recordId),
+      details
+    });
+
+  if (error) {
+    console.error("Log Fehler:", error);
+  }
+}
