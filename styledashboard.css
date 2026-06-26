@@ -346,3 +346,43 @@ td {
   border-radius: 6px;
   cursor: pointer;
 }
+
+.calendar-toolbar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+#calendar {
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+}
+
+.fc {
+  font-family: "Poppins", sans-serif;
+}
+
+.fc-toolbar-title {
+  font-size: 1.4rem !important;
+}
+
+#event-details {
+  padding: 10px;
+}
+
+.event-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.event-card h3 {
+  margin: 0;
+}
+
+.event-card-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
