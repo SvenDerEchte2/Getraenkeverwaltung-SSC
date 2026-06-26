@@ -386,3 +386,19 @@ td {
   gap: 10px;
   margin-top: 10px;
 }
+
+.back-button {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: #16a085;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.back-button:hover {
+  background: #12876f;
+}
